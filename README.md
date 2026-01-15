@@ -60,3 +60,22 @@ npm run dev
 ```
 
 # 4) Open the app in browser: http://localhost:4000
+
+---
+
+## Installation with Docker
+
+# 1) Clone the repository
+```bash
+git clone https://github.com/upahar-khatiwada/chat-app.git
+cd chat-app
+```
+
+# 2) Make sure you have .env setup in backend and frontend both
+
+# 3) Build and start the Docker containers
+```bash
+docker-compose up --build
+```
+
+# 4) Open the app in browser: http://localhost:4000
