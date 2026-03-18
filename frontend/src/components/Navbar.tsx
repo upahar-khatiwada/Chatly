@@ -8,6 +8,7 @@ import { useState } from "react";
 import { debounce } from "lodash";
 import type User from "../interfaces/user_interface";
 import { baseUrl } from "../config/baseurl";
+import DOMPurify from "dompurify";
 
 interface NavbarProps {
   onUserSelect: (user: User | null) => void;
@@ -81,7 +82,7 @@ const Navbar = ({ onUserSelect }: NavbarProps) => {
                   >
                     {user.avatar && (
                       <img
-                        src={user.avatar}
+                        src={DOMPurify.sanitize(user.avatar)}
                         alt={user.fullName}
                         className="w-8 h-8 rounded-full object-cover"
                       />

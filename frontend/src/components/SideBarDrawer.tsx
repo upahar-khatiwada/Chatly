@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { connectSocket, getSocket } from "../socket";
 import SideBarSkeleton from "./skeletons/SideBarSkeleton";
 import { baseUrl } from "../config/baseurl";
+import DOMPurify from "dompurify";
 
 interface SideBarDrawerProps {
   onChatSelect: (user: User) => void;
@@ -171,7 +172,7 @@ const SidebarDrawer = ({ onChatSelect }: SideBarDrawerProps) => {
                     className="flex items-center gap-2 p-2 hover:bg-[#704026] hover:rounded-xl transition-all duration-200 cursor-pointer relative"
                   >
                     <img
-                      src={u.avatar}
+                      src={DOMPurify.sanitize(u.avatar)}
                       alt={u.fullName}
                       className="w-10 h-10 rounded-full"
                       referrerPolicy="no-referrer"

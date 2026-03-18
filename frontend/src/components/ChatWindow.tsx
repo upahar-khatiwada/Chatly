@@ -12,6 +12,7 @@ import { getSocket } from "../socket";
 import MessageSkeleton from "./skeletons/MessageSkeleton";
 import ChatHeaderSkeleton from "./skeletons/ChatHeaderSkeleton";
 import { toast } from "sonner";
+import DOMPurify from "dompurify";
 
 interface ChatWindowProps {
   userChattingWith: User;
@@ -37,7 +38,7 @@ export default function ChatWindow({
   const [loading, setLoading] = useState<boolean>(false);
   const [typing, setTyping] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<string | undefined>(
-    undefined
+    undefined,
   );
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -73,7 +74,7 @@ export default function ChatWindow({
       const res: ChatMessage = await sendMessagePostApi(
         userChattingWith._id,
         textToSend,
-        imageToSend
+        imageToSend,
       );
       setMessages((prev) => [...prev, res]);
     } catch (err) {
@@ -228,7 +229,7 @@ export default function ChatWindow({
                   >
                     {msg.image && (
                       <img
-                        src={msg.image}
+                        src={DOMPurify.sanitize(msg.image)}
                         alt="Attachment"
                         className="sm:max-w-[180px] rounded-md mb-2"
                       />
